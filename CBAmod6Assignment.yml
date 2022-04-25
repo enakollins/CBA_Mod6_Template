@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Create IAM Users using Cloudformation
+
+Resources:
+  MgtUser:
+    Type: AWS::IAM::User
+    Properties: 
+      UserName: Manager_name # give a name to this user
+      LoginProfile: # specify a password for this user
+        Password: pa$$w0rd
+        PasswordResetRequired: true # make this user to set a new
+      ManagedPolicyArns: 
+        - arn:aws:iam::aws:policy/AdministratorAccess #Provides full access to AWS services and resources
+  
+  DevTeamUser:
+    Type: AWS::IAM::User
+    Properties: 
+      UserName: Developer_name # give a name to this user
+      LoginProfile: # specify a password for this user
+        Password: pa$$w0rd
+        PasswordResetRequired: true # make this user to set a new
+      ManagedPolicyArns: 
+        - arn:aws:iam::aws:policy/AmazonEC2FullAccess #Provides full access to Amazon EC2 via the AWS Management Console.
+
+  AuxUser:
+    Type: AWS::IAM::User
+    Properties: 
+      UserName: Intern_name # give a name to this user
+      LoginProfile: # specify a password for this user
+        Password: pa$$w0rd
+        PasswordResetRequired: true # make this user to set a new
+      ManagedPolicyArns: 
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess #Provides full access to all buckets via the AWS Management Console
+      Policies: # list of inline policy documents that are embedded in the user
+        - PolicyName: inlineS3ListBucketPolicy # give a unique name to this policy
+          PolicyDocument: # JSON policy document
+            Version: '2012-10-17'
+            Statement: # allow list bucket only access to all S3 buckets
+              - Effect: Allow
+                Action:
+                  - 's3:ListBucket'
+                Resource: "arn:aws:s3:::dms-*"
