@@ -20,7 +20,7 @@ Resources:
         Password: pa$$w0rd
         PasswordResetRequired: true # make this user to set a new
       ManagedPolicyArns: 
-        - arn:aws:iam::aws:policy/IAMFullAccess
+        - arn:aws:iam::aws:policy/IAMUserChangePassword
         - arn:aws:iam::aws:policy/AmazonEC2FullAccess #Provides full access to Amazon EC2 via the AWS Management Console.
 
   AuxUser:
@@ -31,7 +31,7 @@ Resources:
         Password: pa$$w0rd
         PasswordResetRequired: true # make this user to set a new
       ManagedPolicyArns: 
-        - arn:aws:iam::aws:policy/IAMFullAccess
+        - arn:aws:iam::aws:policy/IAMUserChangePassword
         - arn:aws:iam::aws:policy/AmazonS3FullAccess #Provides full access to all buckets via the AWS Management Console
       Policies: # list of inline policy documents that are embedded in the user
         - PolicyName: inlineS3ListBucketPolicy # give a unique name to this policy
@@ -44,10 +44,12 @@ Resources:
                 Resource: "arn:aws:s3:::dms-*"
 
 
-    Password: boostaMOD6
-    NoEcho: true
-    Type: String
-    Description: New account password
-    MinLength: '1'
-    MaxLength: '41'
-    ConstraintDescription: the password must be between 1 and 41 characters
+    #Password: boostaMOD6
+  #NoEcho: true
+  #  Type: String
+   # Description: New account password
+   # MinLength: '1'
+  #  MaxLength: '41'
+   # ConstraintDescription: the password must be between 1 and 41 characters
+
+    
